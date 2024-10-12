@@ -1,0 +1,6 @@
+@Sistema_ArgenMotos_HostAddress = http://localhost:5200
+
+GET {{Sistema_ArgenMotos_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
