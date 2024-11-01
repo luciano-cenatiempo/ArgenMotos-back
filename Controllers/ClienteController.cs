@@ -42,12 +42,14 @@ namespace Sistema_ArgenMotos.Controllers
         public async Task<ActionResult<ClienteDTO>> Create(ClienteCreateUpdateDTO clienteDto)
         {
             var newCliente = await _clienteService.CreateAsync(clienteDto);
-            return CreatedAtAction(nameof(Get), new { id = newCliente.ClienteId }, newCliente);
+            return CreatedAtAction(nameof(Get), new { id = newCliente.Id }, newCliente);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<ClienteDTO>> Update(int id, ClienteCreateUpdateDTO clienteDto)
         {
+            Console.WriteLine(clienteDto.ToString());
+            Console.WriteLine(id);
             var updatedCliente = await _clienteService.UpdateAsync(id, clienteDto);
             return Ok(updatedCliente);
         }
@@ -55,8 +57,12 @@ namespace Sistema_ArgenMotos.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _clienteService.DeleteAsync(id);
-            return NoContent();
+            
+            var resp = await _clienteService.DeleteAsync(id);
+           
+            return Ok(resp);
+            
+            
         }
     }
 }

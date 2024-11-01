@@ -76,7 +76,7 @@ namespace Sistema_ArgenMotos.Services
             var factura = await _context.Facturas
                 .Include(f => f.Articulos)
                 .ThenInclude(fa => fa.Articulo)
-                .FirstOrDefaultAsync(f => f.FacturaId == id);
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (factura == null)
             {
@@ -113,7 +113,7 @@ namespace Sistema_ArgenMotos.Services
                 // Crear la relación Factura_Articulo y asignar el precio del artículo desde la base de datos
                 var facturaArticulo = new Factura_Articulo
                 {
-                    ArticuloId = articulo.ArticuloId,
+                    ArticuloId = articulo.Id,
                     Cantidad = articuloDTO.Cantidad,
                     PrecioUnitario = articulo.Precio
                 };
@@ -142,7 +142,7 @@ namespace Sistema_ArgenMotos.Services
         {
             var factura = await _context.Facturas
                 .Include(f => f.Articulos)
-                .FirstOrDefaultAsync(f => f.FacturaId == id);
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (factura == null)
             {
@@ -184,7 +184,7 @@ namespace Sistema_ArgenMotos.Services
                 // Crear la relación Factura_Articulo y asignar el precio del artículo desde la base de datos
                 var facturaArticulo = new Factura_Articulo
                 {
-                    ArticuloId = articulo.ArticuloId,
+                    ArticuloId = articulo.Id,
                     Cantidad = articuloDTO.Cantidad,
                     PrecioUnitario = articulo.Precio
                 };
@@ -212,7 +212,7 @@ namespace Sistema_ArgenMotos.Services
         {
             var factura = await _context.Facturas
                 .Include(f => f.Articulos)
-                .FirstOrDefaultAsync(f => f.FacturaId == id);
+                .FirstOrDefaultAsync(f => f.Id == id);
 
             if (factura == null)
             {

@@ -17,17 +17,24 @@ namespace Sistema_ArgenMotos.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ArticuloDTO>>> Get(
-            [FromQuery] string? nombre,
-            [FromQuery] string? marca,
-            [FromQuery] string? anno,
-            [FromQuery] string? descripcion,
-            [FromQuery] int pageNumber = 1,
-            [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<ArticuloDTO>>> Get()
         {
-            var articulos = await _articuloService.GetFilteredAsync(nombre, marca, anno, descripcion, pageNumber, pageSize);
+            var articulos = await _articuloService.GetAllAsync();
             return Ok(articulos);
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<ArticuloDTO>>> Get(
+        //   [FromQuery] string? nombre,
+        //   [FromQuery] string? marca,
+        //   [FromQuery] string? anno,
+        //   [FromQuery] string? descripcion,
+        //   [FromQuery] int pageNumber = 1,
+        //   [FromQuery] int pageSize = 10)
+        //{
+        //    var articulos = await _articuloService.GetFilteredAsync(nombre, marca, anno, descripcion, pageNumber, pageSize);
+        //    return Ok(articulos);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ArticuloDTO>> Get(int id)
@@ -40,12 +47,14 @@ namespace Sistema_ArgenMotos.Controllers
         public async Task<ActionResult<ArticuloDTO>> Create([FromBody] ArticuloCreateUpdateDTO articuloCreateDto)
         {
             var articulo = await _articuloService.AddAsync(articuloCreateDto);
-            return CreatedAtAction(nameof(Get), new { id = articulo.ArticuloId }, articulo);
+            return CreatedAtAction(nameof(Get), new { id = articulo.Id }, articulo);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<ArticuloDTO>> Update(int id, [FromBody] ArticuloCreateUpdateDTO articuloUpdateDto)
         {
+            Console.WriteLine(articuloUpdateDto.ToString());
+            Console.WriteLine(id);
             var articulo = await _articuloService.UpdateAsync(id, articuloUpdateDto);
             return Ok(articulo);
         }
@@ -53,8 +62,8 @@ namespace Sistema_ArgenMotos.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _articuloService.DeleteAsync(id);
-            return NoContent();
+            var resp = await _articuloService.DeleteAsync(id);
+            return Ok(resp);
         }
     }
 }

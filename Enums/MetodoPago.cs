@@ -5,6 +5,7 @@
         QR,
         TarjetaDeDebito,
         TarjetaDeCredito,
-        MercadoPago
+        MercadoPago,
+        Efectivo
     }
 }

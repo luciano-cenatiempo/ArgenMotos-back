@@ -57,8 +57,8 @@ namespace Sistema_ArgenMotos.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _ordenDeCompraService.DeleteAsync(id);
-            return NoContent();
+            var resp = await _ordenDeCompraService.DeleteAsync(id);
+            return Ok(resp);
         }
     }
 }

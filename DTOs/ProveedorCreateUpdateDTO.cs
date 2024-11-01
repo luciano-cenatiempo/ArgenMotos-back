@@ -6,7 +6,7 @@ namespace Sistema_ArgenMotos.DTOs
     public class ProveedorCreateUpdateDTO
     {
         [Required(ErrorMessage = "La razón social es obligatoria")]
-        public RazonSocial RazonSocial { get; set; }
+        public string RazonSocial { get; set; }
 
         [MaxLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres")]
         public string Nombre { get; set; }

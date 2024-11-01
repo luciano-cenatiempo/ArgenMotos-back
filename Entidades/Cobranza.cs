@@ -6,7 +6,7 @@ namespace Sistema_ArgenMotos.Entidades
     public class Cobranza
     {
         [Key]
-        public int CobranzaId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public MetodoPago MetodoPago { get; set; }

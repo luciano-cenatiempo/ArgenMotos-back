@@ -73,7 +73,7 @@ namespace Sistema_ArgenMotos.Services
         {
             var ordenDeCompra = await _context.OrdenesDeCompra
                 .Include(o => o.Articulos)
-                .FirstOrDefaultAsync(o => o.OrdenDeCompraId == id);
+                .FirstOrDefaultAsync(o => o.Id == id);
 
             if (ordenDeCompra == null)
             {
@@ -101,7 +101,7 @@ namespace Sistema_ArgenMotos.Services
                 // Crear la relación OrdenDeCompra_Articulo usando el PrecioUnitario proporcionado por el DTO
                 var ordenArticulo = new OrdenDeCompra_Articulo
                 {
-                    ArticuloId = articulo.ArticuloId,
+                    ArticuloId = articulo.Id,
                     Cantidad = articuloDTO.Cantidad,
                     PrecioUnitario = articuloDTO.PrecioUnitario // Usar el precio unitario de compra proporcionado en el DTO
                 };
@@ -132,7 +132,7 @@ namespace Sistema_ArgenMotos.Services
         {
             var ordenDeCompra = await _context.OrdenesDeCompra
                 .Include(o => o.Articulos)
-                .FirstOrDefaultAsync(o => o.OrdenDeCompraId == id);
+                .FirstOrDefaultAsync(o => o.Id == id);
 
             if (ordenDeCompra == null)
             {
@@ -167,7 +167,7 @@ namespace Sistema_ArgenMotos.Services
                 // Crear la relación OrdenDeCompra_Articulo usando el PrecioUnitario proporcionado por el DTO
                 var ordenArticulo = new OrdenDeCompra_Articulo
                 {
-                    ArticuloId = articulo.ArticuloId,
+                    ArticuloId = articulo.Id,
                     Cantidad = articuloDTO.Cantidad,
                     PrecioUnitario = articuloDTO.PrecioUnitario // Usar el precio unitario de compra proporcionado en el DTO
                 };
@@ -199,19 +199,28 @@ namespace Sistema_ArgenMotos.Services
             return _mapper.Map<OrdenDeCompraDTO>(ordenDeCompra);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var ordenDeCompra = await _context.OrdenesDeCompra
-                .Include(o => o.Articulos)
-                .FirstOrDefaultAsync(o => o.OrdenDeCompraId == id);
-
-            if (ordenDeCompra == null)
+            try
             {
-                throw new Exception("Orden de compra no encontrada");
-            }
 
-            _context.OrdenesDeCompra.Remove(ordenDeCompra);
-            await _context.SaveChangesAsync();
+                var ordenDeCompra = await _context.OrdenesDeCompra
+                    .Include(o => o.Articulos)
+                    .FirstOrDefaultAsync(o => o.Id == id);
+
+                if (ordenDeCompra == null)
+                {
+                    throw new Exception("Orden de compra no encontrada");
+                }
+
+                _context.OrdenesDeCompra.Remove(ordenDeCompra);
+                await _context.SaveChangesAsync();
+                return true;
+            } catch(Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+                return false;
+            }
         }
 
         private async Task ActualizarStockArticulos(ICollection<OrdenDeCompra_Articulo> ordenDeCompraArticulos)

@@ -24,10 +24,26 @@ builder.Services.AddScoped<IVendedorService, VendedorService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IFacturaService, FacturaService>();
 builder.Services.AddScoped<ICobranzaService, CobranzaService>();
+builder.Services.AddScoped<IOtroComprobanteService, OtroComprobanteService>();
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// CORS
+// Agrega los servicios de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("angularApp", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200") // Cambia esto por el origen permitido
+               .SetIsOriginAllowedToAllowWildcardSubdomains()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -37,6 +53,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// cors
+app.UseCors("angularApp");
 
 app.UseHttpsRedirection();
 

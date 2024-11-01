@@ -5,7 +5,7 @@ namespace Sistema_ArgenMotos.Entidades
     public class Factura
     {
         [Key]
-        public int FacturaId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public DateTime Fecha { get; set; }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Sistema_ArgenMotos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241030163738_cambioIds")]
+    partial class cambioIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,11 +26,11 @@ namespace Sistema_ArgenMotos.Migrations
 
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.Articulo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ArticuloId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ArticuloId"));
 
                     b.Property<string>("Anno")
                         .IsRequired()
@@ -61,18 +64,18 @@ namespace Sistema_ArgenMotos.Migrations
                     b.Property<int>("StockMinimo")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("ArticuloId");
 
                     b.ToTable("Articulos");
                 });
 
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.Cliente", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ClienteId"));
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -108,18 +111,18 @@ namespace Sistema_ArgenMotos.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("ClienteId");
 
                     b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.Cobranza", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CobranzaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CobranzaId"));
 
                     b.Property<int>("FacturaId")
                         .HasColumnType("integer");
@@ -133,7 +136,7 @@ namespace Sistema_ArgenMotos.Migrations
                     b.Property<decimal>("MontoTotal")
                         .HasColumnType("numeric");
 
-                    b.HasKey("Id");
+                    b.HasKey("CobranzaId");
 
                     b.HasIndex("FacturaId");
 
@@ -142,11 +145,11 @@ namespace Sistema_ArgenMotos.Migrations
 
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.Factura", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("FacturaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FacturaId"));
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("integer");
@@ -160,7 +163,7 @@ namespace Sistema_ArgenMotos.Migrations
                     b.Property<int>("VendedorId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("FacturaId");
 
                     b.HasIndex("ClienteId");
 
@@ -192,11 +195,11 @@ namespace Sistema_ArgenMotos.Migrations
 
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.OrdenDeCompra", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrdenDeCompraId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrdenDeCompraId"));
 
                     b.Property<int>("Estado")
                         .HasColumnType("integer");
@@ -210,7 +213,7 @@ namespace Sistema_ArgenMotos.Migrations
                     b.Property<int>("ProveedorId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrdenDeCompraId");
 
                     b.HasIndex("ProveedorId");
 
@@ -238,54 +241,13 @@ namespace Sistema_ArgenMotos.Migrations
                     b.ToTable("OrdenDeCompra_Articulos");
                 });
 
-            modelBuilder.Entity("Sistema_ArgenMotos.Entidades.OtroComprobante", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FacturaId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal>("Monto")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("VendedorId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("descripcion")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("tipo")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("FacturaId");
-
-                    b.HasIndex("VendedorId");
-
-                    b.ToTable("OtroComprobante");
-                });
-
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.Proveedor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProveedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProveedorId"));
 
                     b.Property<string>("CUIL")
                         .IsRequired()
@@ -309,26 +271,25 @@ namespace Sistema_ArgenMotos.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<string>("RazonSocial")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("RazonSocial")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Telefono")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProveedorId");
 
                     b.ToTable("Proveedores");
                 });
 
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.Vendedor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("VendedorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("VendedorId"));
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -359,7 +320,7 @@ namespace Sistema_ArgenMotos.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");
 
-                    b.HasKey("Id");
+                    b.HasKey("VendedorId");
 
                     b.ToTable("Vendedores");
                 });
@@ -441,33 +402,6 @@ namespace Sistema_ArgenMotos.Migrations
                     b.Navigation("Articulo");
 
                     b.Navigation("OrdenDeCompra");
-                });
-
-            modelBuilder.Entity("Sistema_ArgenMotos.Entidades.OtroComprobante", b =>
-                {
-                    b.HasOne("Sistema_ArgenMotos.Entidades.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sistema_ArgenMotos.Entidades.Factura", "Factura")
-                        .WithMany()
-                        .HasForeignKey("FacturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Sistema_ArgenMotos.Entidades.Vendedor", "Vendedor")
-                        .WithMany()
-                        .HasForeignKey("VendedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Factura");
-
-                    b.Navigation("Vendedor");
                 });
 
             modelBuilder.Entity("Sistema_ArgenMotos.Entidades.Articulo", b =>

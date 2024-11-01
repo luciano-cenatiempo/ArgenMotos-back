@@ -5,7 +5,7 @@ namespace Sistema_ArgenMotos.Entidades
     public class OrdenDeCompra
     {
         [Key]
-        public int OrdenDeCompraId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public DateTime Fecha { get; set; }

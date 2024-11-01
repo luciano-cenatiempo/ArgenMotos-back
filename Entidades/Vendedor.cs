@@ -6,7 +6,7 @@ namespace Sistema_ArgenMotos.Entidades
     public class Vendedor
     {
         [Key]
-        public int VendedorId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(10)]

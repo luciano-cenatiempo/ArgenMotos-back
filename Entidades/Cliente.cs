@@ -5,7 +5,7 @@ namespace Sistema_ArgenMotos.Entidades
 {
     public class Cliente
     {
-        public int ClienteId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(10)]

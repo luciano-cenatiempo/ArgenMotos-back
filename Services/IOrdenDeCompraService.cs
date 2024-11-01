@@ -10,6 +10,6 @@ namespace Sistema_ArgenMotos.Services
         Task<OrdenDeCompraDTO> GetByIdAsync(int id);
         Task<OrdenDeCompraDTO> AddAsync(OrdenDeCompraCreateUpdateDTO ordenDeCompraCreateDto);
         Task<OrdenDeCompraDTO> UpdateAsync(int id, OrdenDeCompraCreateUpdateDTO ordenDeCompraUpdateDto);
-        Task DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

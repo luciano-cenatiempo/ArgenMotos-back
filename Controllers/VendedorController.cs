@@ -17,17 +17,24 @@ namespace Sistema_ArgenMotos.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VendedorDTO>>> Get(
-            [FromQuery] string dni,
-            [FromQuery] string nombre,
-            [FromQuery] string apellido,
-            [FromQuery] EstadoVendedor? estado,
-            [FromQuery] int pageNumber = 1,
-            [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<VendedorDTO>>> Get()
         {
-            var vendedores = await _vendedorService.GetFilteredAsync(dni, nombre, apellido, estado, pageNumber, pageSize);
+            var vendedores = await _vendedorService.GetAllAsync();
             return Ok(vendedores);
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<VendedorDTO>>> Get(
+        //    [FromQuery] string dni,
+        //    [FromQuery] string nombre,
+        //    [FromQuery] string apellido,
+        //    [FromQuery] EstadoVendedor? estado,
+        //    [FromQuery] int pageNumber = 1,
+        //    [FromQuery] int pageSize = 10)
+        //{
+        //    var vendedores = await _vendedorService.GetFilteredAsync(dni, nombre, apellido, estado, pageNumber, pageSize);
+        //    return Ok(vendedores);
+        //}
 
 
         [HttpGet("{id}")]
@@ -42,7 +49,7 @@ namespace Sistema_ArgenMotos.Controllers
         public async Task<ActionResult<VendedorDTO>> Create(VendedorCreateUpdateDTO vendedorDTO)
         {
             var vendedor = await _vendedorService.AddAsync(vendedorDTO);
-            return CreatedAtAction(nameof(GetById), new { id = vendedor.VendedorId }, vendedor);
+            return CreatedAtAction(nameof(GetById), new { id = vendedor.Id }, vendedor);
         }
 
         [HttpPut("{id}")]
@@ -55,8 +62,8 @@ namespace Sistema_ArgenMotos.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _vendedorService.DeleteAsync(id);
-            return NoContent();
+            var resp = await _vendedorService.DeleteAsync(id);
+            return Ok(resp);
         }
     }
 }

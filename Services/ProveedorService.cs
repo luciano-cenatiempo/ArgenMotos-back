@@ -85,17 +85,25 @@ namespace Sistema_ArgenMotos.Services
             return _mapper.Map<ProveedorDTO>(updatedProveedor.Entity);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var proveedor = await _context.Proveedores.FindAsync(id);
-
-            if (proveedor == null)
+            try
             {
-                throw new Exception("Cliente no encontrado");
-            }
+                var proveedor = await _context.Proveedores.FindAsync(id);
 
-            _context.Proveedores.Remove(proveedor);
-            await _context.SaveChangesAsync();
+                if (proveedor == null)
+                {
+                    throw new Exception("Cliente no encontrado");
+                }
+
+                _context.Proveedores.Remove(proveedor);
+                await _context.SaveChangesAsync();
+                return true;
+            }catch(Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+                return false;
+            }
         }
     }
 }

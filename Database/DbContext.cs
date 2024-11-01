@@ -17,6 +17,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Factura> Facturas { get; set; }
     public DbSet<Factura_Articulo> Factura_Articulos { get; set; }
     public DbSet<Cobranza> Cobranzas { get; set; }
+    public DbSet<OtroComprobante> OtroComprobante { get; set; }
+
 
     // Método para configurar el modelo
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -36,7 +36,7 @@ namespace Sistema_ArgenMotos.Controllers
         public async Task<ActionResult<CobranzaDTO>> Create(CobranzaCreateUpdateDTO cobranzaDTO)
         {
             var cobranza = await _cobranzaService.CreateAsync(cobranzaDTO);
-            return CreatedAtAction(nameof(Get), new { id = cobranza.CobranzaId }, cobranza);
+            return CreatedAtAction(nameof(Get), new { id = cobranza.Id }, cobranza);
         }
 
         [HttpPut("{id}")]

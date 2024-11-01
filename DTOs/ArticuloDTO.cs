@@ -2,7 +2,7 @@
 {
     public class ArticuloDTO
     {
-        public int ArticuloId { get; set; }
+        public int Id { get; set; }
         public string Descripcion { get; set; }
         public int StockActual { get; set; }
         public int StockMinimo { get; set; }

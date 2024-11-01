@@ -6,10 +6,10 @@ namespace Sistema_ArgenMotos.Entidades
     public class Proveedor
     {
         [Key]
-        public int ProveedorId { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public RazonSocial RazonSocial { get; set; }
+        public string RazonSocial { get; set; }
 
         [MaxLength(100)]
         public string Nombre { get; set; }

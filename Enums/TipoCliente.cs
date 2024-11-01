@@ -3,6 +3,6 @@
     public enum TipoCliente
     {
         Regular,
-        Mayorista
+        Mayorista   
     }
 }

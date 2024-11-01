@@ -44,7 +44,7 @@ namespace Sistema_ArgenMotos.Controllers
         public async Task<ActionResult<FacturaDTO>> Create(FacturaCreateUpdateDTO facturaDTO)
         {
             var factura = await _facturaService.CreateAsync(facturaDTO);
-            return CreatedAtAction(nameof(Get), new { id = factura.FacturaId }, facturaDTO);
+            return CreatedAtAction(nameof(Get), new { id = factura.Id }, facturaDTO);
         }
 
         [HttpPut("{id}")]

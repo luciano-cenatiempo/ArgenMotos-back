@@ -68,7 +68,7 @@ namespace Sistema_ArgenMotos.Services
         {
             var cobranza = await _context.Cobranzas
                 .Include(c => c.Factura) // Si necesitas la factura
-                .FirstOrDefaultAsync(c => c.CobranzaId == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (cobranza == null)
             {
@@ -101,7 +101,7 @@ namespace Sistema_ArgenMotos.Services
         public async Task<CobranzaDTO> UpdateAsync(int id, CobranzaCreateUpdateDTO cobranzaDTO)
         {
             var cobranza = await _context.Cobranzas
-                .FirstOrDefaultAsync(c => c.CobranzaId == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (cobranza == null)
             {
@@ -128,7 +128,7 @@ namespace Sistema_ArgenMotos.Services
         public async Task DeleteAsync(int id)
         {
             var cobranza = await _context.Cobranzas
-                .FirstOrDefaultAsync(c => c.CobranzaId == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (cobranza == null)
             {

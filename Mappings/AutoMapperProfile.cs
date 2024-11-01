@@ -39,6 +39,10 @@ namespace Sistema_ArgenMotos.Mappings
             // Mapeo para Cobranza
             CreateMap<Cobranza, CobranzaDTO>().ReverseMap();
             CreateMap<CobranzaCreateUpdateDTO, Cobranza>().ReverseMap();
+
+            // Mapeo para otros comprobantes
+            CreateMap<OtroComprobante, OtroComprobanteDTO>().ReverseMap();
+            CreateMap<OtroComprobanteCreateDTO, OtroComprobante>().ReverseMap();
         }
     }
 }

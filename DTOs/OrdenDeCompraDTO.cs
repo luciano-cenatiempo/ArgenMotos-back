@@ -4,7 +4,7 @@ namespace Sistema_ArgenMotos.DTOs
 {
     public class OrdenDeCompraDTO
     {
-        public int OrdenDeCompraId { get; set; }
+        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public decimal PrecioTotal { get; set; }
         public EstadoOrdenDeCompra Estado { get; set; }

@@ -5,7 +5,7 @@ namespace Sistema_ArgenMotos.Entidades
     public class Articulo
     {
         [Key]
-        public int ArticuloId { get; set; }
+        public int Id { get; set; }
 
         [Required, MaxLength(200)]
         public string Descripcion { get; set; }

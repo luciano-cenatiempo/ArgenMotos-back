@@ -2,7 +2,7 @@
 {
     public class FacturaDTO
     {
-        public int FacturaId { get; set; }
+        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public decimal PrecioFinal { get; set; }
         public int ClienteId { get; set; }

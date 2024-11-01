@@ -17,16 +17,23 @@ namespace Sistema_ArgenMotos.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProveedorDTO>>> Get(
-            [FromQuery] string nombre,
-            [FromQuery] string cuil,
-            [FromQuery] EstadoProveedor? estado,
-            [FromQuery] int pageNumber = 1,
-            [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<ProveedorDTO>> Get()
         {
-            var proveedores = await _proveedorService.GetFilteredAsync(nombre, cuil, estado, pageNumber, pageSize);
+            var proveedores = await _proveedorService.GetAllAsync();
             return Ok(proveedores);
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<ProveedorDTO>>> Get(
+        //    [FromQuery] string? nombre,
+        //    [FromQuery] string? cuil,
+        //    [FromQuery] EstadoProveedor? estado,
+        //    [FromQuery] int? pageNumber = 1,
+        //    [FromQuery] int? pageSize = 10)
+        //{
+        //    var proveedores = await _proveedorService.GetFilteredAsync(nombre, cuil, estado, pageNumber, pageSize);
+        //    return Ok(proveedores);
+    
 
 
         [HttpGet("{id}")]
@@ -40,7 +47,7 @@ namespace Sistema_ArgenMotos.Controllers
         public async Task<ActionResult<ProveedorDTO>> Create([FromBody] ProveedorCreateUpdateDTO proveedorCreateDto)
         {
             var proveedor = await _proveedorService.CreateAsync(proveedorCreateDto);
-            return CreatedAtAction(nameof(Get), new { id = proveedor.ProveedorId }, proveedor);
+            return CreatedAtAction(nameof(Get), new { id = proveedor.Id }, proveedor);
         }
 
         [HttpPut("{id}")]
@@ -53,8 +60,8 @@ namespace Sistema_ArgenMotos.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _proveedorService.DeleteAsync(id);
-            return NoContent();
+            var resp =await _proveedorService.DeleteAsync(id);
+            return Ok(resp);
         }
     }
 }
