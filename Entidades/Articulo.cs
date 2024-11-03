@@ -22,6 +22,9 @@ namespace Sistema_ArgenMotos.Entidades
         [Range(0, double.MaxValue)]
         public decimal Precio { get; set; }
 
+        [Range(0, double.MaxValue)]
+        public decimal PrecioCompra { get; set; }
+
         [MaxLength(100)]
         public string Marca { get; set; }
 

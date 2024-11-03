@@ -8,6 +8,7 @@
         public int StockMinimo { get; set; }
         public int StockMaximo { get; set; }
         public decimal Precio { get; set; }
+        public decimal PrecioCompra { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public string Anno { get; set; }

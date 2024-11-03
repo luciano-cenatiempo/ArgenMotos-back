@@ -21,6 +21,9 @@ namespace Sistema_ArgenMotos.DTOs
         [Range(0, double.MaxValue, ErrorMessage = "El precio debe ser un valor positivo")]
         public decimal Precio { get; set; }
 
+        [Range(0, double.MaxValue, ErrorMessage = "El precio debe ser un valor positivo")]
+        public decimal PrecioCompra { get; set; }
+
         [MaxLength(100, ErrorMessage = "La marca no puede tener más de 100 caracteres")]
         public string Marca { get; set; }
 
