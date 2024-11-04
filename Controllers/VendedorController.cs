@@ -47,6 +47,14 @@ namespace Sistema_ArgenMotos.Controllers
             return Ok(vendedor);
         }
 
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult> existEmail(string email)
+        {
+            var resp = await _vendedorService.ExistEmail(email);
+        
+            return Ok(resp);
+        }
+
         [HttpPost]
         public async Task<ActionResult<VendedorDTO>> Create(VendedorCreateUpdateDTO vendedorDTO)
         {

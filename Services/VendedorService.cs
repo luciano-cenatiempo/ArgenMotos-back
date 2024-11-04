@@ -115,5 +115,19 @@ namespace Sistema_ArgenMotos.Services
                 return false;
             }
         }
+
+        public async Task<bool> ExistEmail(string email)
+        {
+            var vendedor = await _context.Vendedores.FirstOrDefaultAsync(e => e.Email == email);
+            if(vendedor  != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }

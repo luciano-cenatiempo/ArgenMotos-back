@@ -11,5 +11,7 @@ namespace Sistema_ArgenMotos.Services
         Task<VendedorDTO> AddAsync(VendedorCreateUpdateDTO vendedorDTO);
         Task<VendedorDTO> UpdateAsync(int id, VendedorCreateUpdateDTO vendedorDTO);
         Task<bool> DeleteAsync(int id);
+        Task <bool> ExistEmail(string email);
+
     }
 }
