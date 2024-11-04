@@ -2,8 +2,43 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Sistema_ArgenMotos.Services;
 using Sistema_ArgenMotos.Mappings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sistema ArgenMotos API", Version = "v1" });
+
+    // Configuración de seguridad para JWT
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Introduce el token JWT en el formato: Bearer {token}"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 // Agregar servicios de AutoMapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
@@ -25,6 +60,8 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IFacturaService, FacturaService>();
 builder.Services.AddScoped<ICobranzaService, CobranzaService>();
 builder.Services.AddScoped<IOtroComprobanteService, OtroComprobanteService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 
 
 
@@ -43,6 +80,28 @@ builder.Services.AddCors(options =>
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
+});
+
+// Clave secreta desde la configuración
+var key = Encoding.ASCII.GetBytes(builder.Configuration["AppSettings:Token"]);
+
+// Servicios de autenticación y JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
 });
 
 var app = builder.Build();

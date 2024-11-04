@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sistema_ArgenMotos.DTOs;
 using Sistema_ArgenMotos.Entidades;
@@ -6,6 +7,7 @@ using Sistema_ArgenMotos.Services;
 
 namespace Sistema_ArgenMotos.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class OrdenDeCompraController : ControllerBase

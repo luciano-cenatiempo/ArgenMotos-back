@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Sistema_ArgenMotos.DTOs;
 using Sistema_ArgenMotos.Entidades;
 using Sistema_ArgenMotos.Enums;
@@ -6,6 +7,7 @@ using Sistema_ArgenMotos.Services;
 
 namespace Sistema_ArgenMotos.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ClienteController : ControllerBase

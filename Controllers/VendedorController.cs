@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Sistema_ArgenMotos.DTOs;
 using Sistema_ArgenMotos.Enums;
 using Sistema_ArgenMotos.Services;
 
 namespace Sistema_ArgenMotos.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class VendedorController : ControllerBase

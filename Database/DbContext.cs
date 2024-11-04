@@ -18,6 +18,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Factura_Articulo> Factura_Articulos { get; set; }
     public DbSet<Cobranza> Cobranzas { get; set; }
     public DbSet<OtroComprobante> OtroComprobante { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
+
 
 
     // Método para configurar el modelo
